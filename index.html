@@ -1,0 +1,202 @@
+﻿<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>树莓派Web控制中心</title>
+    <script src="js/jquery-3.2.1.min.js" type="text/javascript"></script>
+    <script src="js/bootstrap.min.js" type="text/javascript"></script>
+    <link href="css/bootstrap.css" rel="stylesheet" type="text/css" />
+    <link href="css/font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+    <style type="text/css">
+        .page-header {
+            margin: 20px 0;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 0;
+            text-align: center;
+        }
+
+        .btn-item {
+            text-align: center;
+        }
+
+        i {
+            margin-right: 3px;
+            display: inline-block;
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        .tip {
+            font-weight: bold;
+            color: black;
+        }
+
+        .lead {
+            font-size: small;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="page-header">
+            <h3>
+                树莓派Web控制中心</h3>
+            <p class="lead">
+                用于控制连接到树莓派的各种传感器
+            </p>
+        </div>
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                设备</div>
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-xs-3 btn-item">
+                    </div>
+                    <div class="col-xs-3 btn-item">
+                        <button type="button" class="btn btn-danger btn-trigger">
+                            <i class="fa fa-power-off"></i>关机</button>
+                    </div>
+                    <div class="col-xs-3 btn-item">
+                        <button type="button" class="btn btn-primary btn-trigger">
+                            <i class="fa fa-refresh"></i>重启</button>
+                    </div>
+                    <div class="col-xs-3 btn-item">
+                    </div>
+                    <script type="text/javascript">
+                        var url = "ajax/pi.php";
+                        $(function () {
+                            $(".btn-trigger").click(function () {
+                                var text = $(this).text().replace(/ /g, "").replace(/\n/g, "").replace(/\r/g, "").replace(/\t/g, "");
+                                var cmd = "";
+                                switch (text) {
+                                    case "关机":
+                                        cmd = "sudo shutdown -h now";
+                                        break;
+                                    case "重启":
+                                        cmd = "sudo reboot";
+                                        break;
+                                }
+                                if (confirm("确定要执行该命令吗？")) {
+                                    $.ajax({
+                                        type: "POST",
+                                        url: url,
+                                        data: {
+                                            action: "set-linux-cmd",
+                                            cmd: cmd
+                                        },
+                                        success: function (result) {
+                                            $(".tip").html(result);
+                                        }
+                                    });
+                                }
+                            });
+                        });
+                    </script>
+                </div>
+            </div>
+        </div>
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                插件</div>
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-xs-12">
+                        <button type="button" class="btn btn-primary" id="download">Aria2</button>
+                        <script type="text/javascript">
+                            $(function () {
+                                $("#download").click(function () {
+                                    window.open("./webui-aria2/index.html")
+                                });
+                            });
+                        </script>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                传感器</div>
+            <div class="panel-body">
+                <div class="row btn-group col-xs-12">
+                    <div class="btn btn-default col-xs-2">
+                        <div class="text-center">temperature</div>
+                    </div>
+                    <div class="btn btn-default col-xs-2">
+                        <div class="text-center">CPU_Usage</div>
+                    </div>
+                    <div class="btn btn-default col-xs-2">
+                        <div class="text-center">RAM_Avail</div>
+                    </div>
+                    <div class="btn btn-default col-xs-2">
+                        <div class="text-center">RAM_Usage</div>
+                    </div>
+                    <div class="btn btn-default col-xs-2">
+                        <div class="text-center">DISK_Avial</div>
+                    </div>
+                    <div class="btn btn-default col-xs-2">
+                        <div class="text-center">DISK_Usage</div>
+                    </div>
+                </div>
+                <div class="row btn-group col-xs-12">
+                    <div class="btn btn-default col-xs-2">
+                        <div class="text-center" id="Temperature">--</div>
+                    </div>
+                    <div class="btn btn-default col-xs-2">
+                        <div class="text-center" id="CPU_Usage">--</div>
+                    </div>
+                    <div class="btn btn-default col-xs-2">
+                        <div class="text-center" id="RAM_Avail">--</div>
+                    </div>
+                    <div class="btn btn-default col-xs-2">
+                        <div class="text-center" id="RAM_Usage">--</div>
+                    </div>
+                    <div class="btn btn-default col-xs-2">
+                        <div class="text-center" id="DISK_Avail">--</div>
+                    </div>
+                    <div class="btn btn-default col-xs-2">
+                        <div class="text-center" id="DISK_Usage">--</div>
+                    </div>
+                    <script type="text/javascript">
+                        let htmlobj
+                        let elements
+                        var interval = setInterval(function () {
+
+                            htmlobj = $.ajax({ url: "ajax/pistats.txt", async: false });
+
+                            elements = htmlobj.responseText.split('\n')
+
+                            $("#Temperature").text(elements[0])
+                            $("#CPU_Usage").text(elements[1])
+                            $("#RAM_Avail").text(elements[2])
+                            $("#RAM_Usage").text(elements[3])
+                            $("#DISK_Avail").text(elements[4])
+                            $("#DISK_Usage").text(elements[5])
+                        }, 1000);
+                    </script>
+                </div>
+            </div>
+        </div>
+        <div class="panel panel-primary" style="border-color:#555">
+            <div class="panel-heading" style="background: #555">
+                终端</div>
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-xs-12">
+                        <div class="alert alert-success" style="" role="alert">
+                            执行：
+                            <span class="tip"> </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
