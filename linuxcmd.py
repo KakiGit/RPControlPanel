@@ -27,7 +27,9 @@ def getRAMinfo():
 
 
 def getCPUuse():
-    return(str(os.popen("top -bn1 | awk '/Cpu\(s\):/ {print $2}'").readline().strip()))
+    data = os.popen("top -bn2 | awk '/Cpu\(s\):/ {print $2}'")
+    data.readline()
+    return data.readline().strip()
 
 # Return information about disk space as a list (unit included)
 # Index 0: total disk space

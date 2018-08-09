@@ -107,14 +107,19 @@
             <div class="panel-body">
                 <div class="row">
                     <div class="col-xs-12">
-                        <button type="button" class="btn btn-primary" id="download">Aria2</button>
+                        <button type="button" class="btn btn-primary" id="aria2">Aria2</button>
+                        <button type="button" class="btn btn-primary" id="download">下载</button>
                         <script type="text/javascript">
                             $(function () {
-                                $("#download").click(function () {
+                                $("#aria2").click(function () {
                                     window.open("./webui-aria2/index.html")
+                                });
+                                $("#download").click(function () {
+                                    window.open("./webui-aria2/Downloads/")
                                 });
                             });
                         </script>
+
                     </div>
                 </div>
             </div>
@@ -123,63 +128,61 @@
             <div class="panel-heading">
                 传感器</div>
             <div class="panel-body">
-                <div class="row btn-group col-xs-12">
-                    <div class="btn btn-default col-xs-2">
-                        <div class="text-center">temperature</div>
+                <div class="row col-xs-12">
+                    <div class="btn-group-vertical col-xs-2">
+                        <div class="btn text-center btn-default">
+                            <img class="text-center" src="png/Temperature.png" height="20px" />
+                        </div>
+                        <div class="btn text-center btn-default" id="Temperature">--</div>
                     </div>
-                    <div class="btn btn-default col-xs-2">
-                        <div class="text-center">CPU_Usage</div>
+                    <div class="btn-group-vertical col-xs-2">
+                        <div class="btn text-center btn-default">
+                            <img class="text-center" src="png/usagecomputer.png" height="20px" />
+                        </div>
+                        <div class="btn btn-default text-center" id="CPU_Usage">--</div>
                     </div>
-                    <div class="btn btn-default col-xs-2">
-                        <div class="text-center">RAM_Avail</div>
+                    <div class="btn-group-vertical col-xs-2">
+                        <div class="btn text-center btn-default">
+                            <img class="text-center" src="png/ram.png" height="20px" />
+                        </div>
+                        <div class="btn btn-default text-center" id="RAM_Avail">--</div>
                     </div>
-                    <div class="btn btn-default col-xs-2">
-                        <div class="text-center">RAM_Usage</div>
+                    <div class="btn-group-vertical col-xs-2">
+                        <div class="btn text-center btn-default">
+                            <img class="text-center" src="png/datausage.png" height="20px" />
+                        </div>
+                        <div class="btn btn-default text-center" id="RAM_Usage">--</div>
                     </div>
-                    <div class="btn btn-default col-xs-2">
-                        <div class="text-center">DISK_Avial</div>
+                    <div class="btn-group-vertical col-xs-2">
+                        <div class="btn text-center btn-default">
+                            <img class="text-center" src="png/disk.png" height="20px" />
+                        </div>
+                        <div class="btn btn-default text-center" id="DISK_Avail">--</div>
                     </div>
-                    <div class="btn btn-default col-xs-2">
-                        <div class="text-center">DISK_Usage</div>
+                    <div class="btn-group-vertical col-xs-2">
+                        <div class="btn text-center btn-default">
+                            <img class="text-center" src="png/datausage.png" height="20px" />
+                        </div>
+                        <div class="btn btn-default text-center" id="DISK_Usage">--</div>
                     </div>
                 </div>
-                <div class="row btn-group col-xs-12">
-                    <div class="btn btn-default col-xs-2">
-                        <div class="text-center" id="Temperature">--</div>
-                    </div>
-                    <div class="btn btn-default col-xs-2">
-                        <div class="text-center" id="CPU_Usage">--</div>
-                    </div>
-                    <div class="btn btn-default col-xs-2">
-                        <div class="text-center" id="RAM_Avail">--</div>
-                    </div>
-                    <div class="btn btn-default col-xs-2">
-                        <div class="text-center" id="RAM_Usage">--</div>
-                    </div>
-                    <div class="btn btn-default col-xs-2">
-                        <div class="text-center" id="DISK_Avail">--</div>
-                    </div>
-                    <div class="btn btn-default col-xs-2">
-                        <div class="text-center" id="DISK_Usage">--</div>
-                    </div>
-                    <script type="text/javascript">
-                        let htmlobj
-                        let elements
-                        var interval = setInterval(function () {
+                <script type="text/javascript">
+                    let htmlobj
+                    let elements
+                    var interval = setInterval(function () {
 
-                            htmlobj = $.ajax({ url: "ajax/pistats.txt", async: false });
+                        htmlobj = $.ajax({ url: "ajax/pistats.txt", async: false });
 
-                            elements = htmlobj.responseText.split('\n')
+                        elements = htmlobj.responseText.split('\n')
 
-                            $("#Temperature").text(elements[0])
-                            $("#CPU_Usage").text(elements[1])
-                            $("#RAM_Avail").text(elements[2])
-                            $("#RAM_Usage").text(elements[3])
-                            $("#DISK_Avail").text(elements[4])
-                            $("#DISK_Usage").text(elements[5])
-                        }, 1000);
-                    </script>
-                </div>
+                        $("#Temperature").text(elements[0] + "℃")
+                        $("#CPU_Usage").text(elements[1] + "%")
+                        $("#RAM_Avail").text(elements[2] + "M")
+                        $("#RAM_Usage").text(elements[3] + "%")
+                        $("#DISK_Avail").text(elements[4] + "G")
+                        $("#DISK_Usage").text(elements[5])
+                    }, 1000);
+                </script>
             </div>
         </div>
         <div class="panel panel-primary" style="border-color:#555">
