@@ -97,4 +97,4 @@ if __name__ == '__main__':
             f.write(str(DISK_perc)+'\n')
             f.close()
         
-        time.sleep(5)
+        time.sleep(2)
