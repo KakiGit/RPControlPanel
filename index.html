@@ -50,6 +50,24 @@
             <p class="lead">
                 Easy way to use Raspberry PI
             </p>
+            <script>
+                let urlConnect = "ajax/stats.php"
+                console.log("I am here")
+                let myInte = setInterval(function () {
+                    $.ajax({
+                        type: "POST",
+                        url: urlConnect,
+                        data: {
+                            action: "set-connection",
+                            cmd: "linked"
+                        },
+                        success: function (result) {
+                        }
+                    });
+                }, 1000)
+
+
+            </script>
         </div>
         <div class="panel panel-primary">
             <div class="panel-heading">

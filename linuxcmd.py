@@ -49,52 +49,68 @@ def getDiskSpace():
 
 
 if __name__ == '__main__':
+
     file = open("/var/www/html/ajax/linuxcmd.txt", "w")
     file.write("")
     file.close()
+
+    file = open("/var/www/html/ajax/connect.txt", "w")
+    file.write("")
+    file.close()
+    count=0
     while True:
-        # read cmd
-        # CPU informatiom
-        CPU_temp = getCPUtemperature()
-        CPU_usage = getCPUuse()
 
-        # RAM information
-        # Output is in kb, here I convert it in Mb for readability
-        RAM_stats = getRAMinfo()
-        RAM_total = round(int(RAM_stats[0]) / 1000, 1)
-        RAM_used = round(int(RAM_stats[1]) / 1000, 1)
-        RAM_free = round(int(RAM_stats[2]) / 1000, 1)
-        RAM_Avail = RAM_total - RAM_used
-        RAM_Usage = round(100*RAM_used / RAM_total, 1)
-
-        # Disk information
-        DISK_stats = getDiskSpace()
-        DISK_total = DISK_stats[0]
-        DISK_used = DISK_stats[1]
-        DISK_perc = DISK_stats[3]
-        DISK_Avail = float(DISK_total.rstrip('G')) - \
-            float(DISK_used.rstrip('G'))
-
-        file = open("/var/www/html/ajax/linuxcmd.txt", "r")
+        file = open("/var/www/html/ajax/connect.txt", "r")
         text = file.read()
         file.close()
-
+        # Disk information
+        count=count+1
         if(text != ""):
-            # clear cmd
-            file = open("/var/www/html/ajax/linuxcmd.txt", "w")
+            count=0
+            print("Connecting ...")
+            file = open("/var/www/html/ajax/connect.txt", "w")
             file.write("")
             file.close()
-            # print(text)
-            os.system(text)
 
-        with open("/var/www/html/ajax/pistats.txt", "w") as f:
-            # f.write(CPU_temp)
-            f.write(CPU_temp+'\n')
-            f.write(CPU_usage+'\n')
-            f.write(str(RAM_Avail)+'\n')
-            f.write(str(RAM_Usage)+'\n')
-            f.write(str(DISK_Avail)+'\n')
-            f.write(str(DISK_perc)+'\n')
-            f.close()
-        
-        time.sleep(2)
+            file = open("/var/www/html/ajax/linuxcmd.txt", "r")
+            text = file.read()
+            file.close()
+
+            if(text != ""):
+                # clear cmd
+                file = open("/var/www/html/ajax/linuxcmd.txt", "w")
+                file.write("")
+                file.close()
+                # print(text)
+                os.system(text)
+
+            DISK_stats = getDiskSpace()
+            DISK_total = DISK_stats[0]
+            DISK_used = DISK_stats[1]
+            DISK_perc = DISK_stats[3]
+            DISK_Avail = float(DISK_total.rstrip('G')) - \
+                float(DISK_used.rstrip('G'))
+            CPU_temp = getCPUtemperature()
+            CPU_usage = getCPUuse()
+            # RAM information
+            # Output is in kb, here I convert it in Mb for readability
+            RAM_stats = getRAMinfo()
+            RAM_total = round(int(RAM_stats[0]) / 1000, 1)
+            RAM_used = round(int(RAM_stats[1]) / 1000, 1)
+            RAM_Avail = RAM_total - RAM_used
+            RAM_Usage = round(RAM_used / RAM_total, 1)
+
+            with open("/var/www/html/ajax/pistats.txt", "w") as f:
+                # f.write(CPU_temp)
+                f.write(CPU_temp+'\n')
+                f.write(CPU_usage+'\n')
+                f.write(str(RAM_Avail)+'\n')
+                f.write(str(RAM_Usage)+'\n')
+                f.write(str(DISK_Avail)+'\n')
+                f.write(str(DISK_perc)+'\n')
+                f.close()
+        sleepTime=1
+        if(count>60):
+           sleepTime=60
+           print("I am going to sleep")
+        time.sleep(sleepTime)
