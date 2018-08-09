@@ -149,7 +149,7 @@
                     </div>
                     <div class="btn-group-vertical col-xs-2">
                         <div class="btn text-center btn-default">
-                            <img class="text-center" src="png/datausage.png" height="20px" />
+                            <img class="text-center" src="png/speedcomputer.png" height="20px" />
                         </div>
                         <div class="btn btn-default text-center" id="RAM_Usage">--</div>
                     </div>
@@ -176,10 +176,50 @@
                         elements = htmlobj.responseText.split('\n')
 
                         $("#Temperature").text(elements[0] + "℃")
+                        if (parseInt(elements[0]) >= 60) {
+                            $("#Temperature").css("background-color", "#d9534f")
+                            $("#Temperature").css("color", "#ffffff")
+                        }
+                        else {
+                            $("#Temperature").css("background-color", "#ffffff")
+                            $("#Temperature").css("color", "#000000")
+                        }
                         $("#CPU_Usage").text(elements[1] + "%")
+                        if (parseInt(elements[1]) >= 80) {
+                            $("#CPU_Usage").css("background-color", "#d9534f")
+                            $("#CPU_Usage").css("color", "#ffffff")
+                        }
+                        else {
+                            $("#CPU_Usage").css("background-color", "#ffffff")
+                            $("#CPU_Usage").css("color", "#000000")
+                        }
                         $("#RAM_Avail").text(elements[2] + "M")
+                        if (parseInt(elements[2]) <= 200) {
+                            $("#RAM_Avail").css("background-color", "#d9534f")
+                            $("#RAM_Usage").css("background-color", "#d9534f")
+                            $("#RAM_Avail").css("color", "#ffffff")
+                            $("#RAM_Usage").css("color", "#ffffff")
+                        }
+                        else {
+                            $("#RAM_Avail").css("background-color", "#ffffff")
+                            $("#RAM_Usage").css("background-color", "#ffffff")
+                            $("#RAM_Avail").css("color", "#000000")
+                            $("#RAM_Usage").css("color", "#000000")
+                        }
                         $("#RAM_Usage").text(elements[3] + "%")
                         $("#DISK_Avail").text(elements[4] + "G")
+                        if (parseInt(elements[4]) <= 10) {
+                            $("#DISK_Avail").css("background-color", "#d9534f")
+                            $("#DISK_Usage").css("background-color", "#d9534f")
+                            $("#DISK_Avail").css("color", "#ffffff")
+                            $("#DISK_Usage").css("color", "#ffffff")
+                        }
+                        else {
+                            $("#DISK_Avail").css("background-color", "#ffffff")
+                            $("#DISK_Usage").css("background-color", "#ffffff")
+                            $("#DISK_Avail").css("color", "#000000")
+                            $("#DISK_Usage").css("color", "#000000")
+                        }
                         $("#DISK_Usage").text(elements[5])
                     }, 1000);
                 </script>

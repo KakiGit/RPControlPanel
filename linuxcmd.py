@@ -65,7 +65,7 @@ if __name__ == '__main__':
         RAM_used = round(int(RAM_stats[1]) / 1000, 1)
         RAM_free = round(int(RAM_stats[2]) / 1000, 1)
         RAM_Avail = RAM_total - RAM_used
-        RAM_Usage = round(RAM_used / RAM_total, 1)
+        RAM_Usage = round(100*RAM_used / RAM_total, 1)
 
         # Disk information
         DISK_stats = getDiskSpace()
