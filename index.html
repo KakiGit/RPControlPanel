@@ -184,7 +184,7 @@
                     let elements
                     var interval = setInterval(function () {
 
-                        htmlobj = $.ajax({ url: "ajax/pistats.txt", async: true });
+                        htmlobj = $.ajax({ url: "ajax/pistats.txt", async: false });
 
                         elements = htmlobj.responseText.split('\n')
 
