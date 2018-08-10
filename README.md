@@ -1,5 +1,7 @@
 # RPControlPanel
 
+This is a Web control panel for Raspberry Pi. Webui-aria2 is integrated into the panel.
+
 1. Use Apache2
 
     ```bash
@@ -12,6 +14,7 @@
     git clone https://github.com/KakiGit/RPControlPanel.git
     cd RPControlPanel
     git clone https://github.com/ziahamza/webui-aria2.git
+    ln -s <Your home directory>/Downloads <YourPath>/webui-aria2/Downloads
     ```
 
 3. Link it to httpd directory which by default is `/var/www/html`.
@@ -32,4 +35,3 @@
    sudo apt-get install aria2
    aria2c --conf-path=/etc/aria2/aria2.conf -D
    ```
-
