@@ -24,7 +24,7 @@
 4. Run linuxcmd.py to read parameters from Raspberry Pi and execute commands from the website.
 
     ```bash
-    sudo nohup python linuxcmd.py &
+    sudo nohup python mylistener.py > /dev/null 2>&1 &
     ```
 5. Get aria2 and run it. The config file can be found on the Internet.
 
