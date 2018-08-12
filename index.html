@@ -70,36 +70,6 @@
                     </div>
                     <div class="col-xs-3 btn-item">
                     </div>
-                    <script type="text/javascript">
-                        var url = "ajax/pi.php";
-                        $(function () {
-                            $(".btn-trigger").click(function () {
-                                var text = $(this).text().replace(/ /g, "").replace(/\n/g, "").replace(/\r/g, "").replace(/\t/g, "");
-                                var cmd = "";
-                                switch (text) {
-                                    case "关机":
-                                        cmd = "sudo shutdown -h now";
-                                        break;
-                                    case "重启":
-                                        cmd = "sudo reboot";
-                                        break;
-                                }
-                                if (confirm("确定要执行该命令吗？")) {
-                                    $.ajax({
-                                        type: "POST",
-                                        url: url,
-                                        data: {
-                                            action: "set-linux-cmd",
-                                            cmd: cmd
-                                        },
-                                        success: function (result) {
-                                            $(".tip").html(result);
-                                        }
-                                    });
-                                }
-                            });
-                        });
-                    </script>
                 </div>
             </div>
         </div>

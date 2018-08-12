@@ -72,6 +72,7 @@ $(function () {
         }
         if (confirm("确定要执行该命令吗？")) {
             ws.send(cmd)
+            $(".tip").html(result);
         }
     })
 })
