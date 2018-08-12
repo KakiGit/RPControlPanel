@@ -13,7 +13,7 @@ This is a Web control panel for Raspberry Pi. Webui-aria2 is integrated into the
     ```bash
     git clone https://github.com/KakiGit/RPControlPanel.git
     cd RPControlPanel
-    git clone https://github.com/ziahamza/webui-aria2.git
+    git submodule add https://github.com/ziahamza/webui-aria2.git
     ln -s <Your home directory>/Downloads <YourPath>/webui-aria2/Downloads
     ```
 
