@@ -182,7 +182,7 @@
                 <script type="text/javascript">
                     var interval = setInterval(function () {
 
-                        $.get("ajax/pistats.txt", function (data) {
+                        $.post("ajax/pistats.txt", function (data) {
                             let elements = data.split('\n')
                             $("#Temperature").text(elements[0] + "℃")
                             if (parseInt(elements[0]) >= 60) {
