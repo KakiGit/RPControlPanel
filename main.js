@@ -6,7 +6,6 @@ $.ajax({
         $("#ipaddr").text(result)
         ws = new WebSocket("ws://" + result + ":9011")
         ws.onmessage = function (data) {
-            console.log(data)
             let elements = data.data.split(' ')
             $("#Temperature").text(elements[0] + "℃")
             if (parseInt(elements[0]) >= 60) {
