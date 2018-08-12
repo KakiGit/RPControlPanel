@@ -95,7 +95,7 @@ def receiveData(client):
         if(data):
             tmp = parse_data(data)
             print(tmp, "from", client.getpeername())
-            os.system(tmp)
+            sendMessage(client, '1 ' + os.system(tmp))
         else:
             break
 
@@ -126,7 +126,7 @@ def systemPara(client):
             str(RAM_Avail)+' '+str(RAM_Usage)+' ' + \
             str(DISK_Avail)+' '+str(DISK_perc)+' '
         if connection.value:
-            sendMessage(client, dataToBeSent)
+            sendMessage(client, '2 ' + dataToBeSent)
 
 
 if __name__ == "__main__":
