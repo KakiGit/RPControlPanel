@@ -51,83 +51,130 @@
                 Easy way to use Raspberry PI
             </p>
             <div class="text-center" id="ipaddr">----</div>
-        </div>
-    </div>
-    </div>
-    <div class="panel panel-primary">
-        <div class="panel-heading">
-            插件</div>
-        <div class="panel-body">
-            <div class="row">
-                <div class="col-xs-12">
-                    <button type="button" class="btn btn-primary" id="aria2">Aria2</button>
-                    <button type="button" class="btn btn-primary" id="download">下载</button>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="panel panel-primary">
-        <div class="panel-heading">
-            传感器</div>
-        <div class="panel-body">
-            <div class="row col-xs-12">
-                <div class="btn-group-vertical col-xs-2">
-                    <div class="btn text-center btn-default">
-                        <img class="text-center" src="png/Temperature.png" height="20px" />
-                    </div>
-                    <div class="btn text-center btn-default" id="Temperature">--</div>
-                </div>
-                <div class="btn-group-vertical col-xs-2">
-                    <div class="btn text-center btn-default">
-                        <img class="text-center" src="png/usagecomputer.png" height="20px" />
-                    </div>
-                    <div class="btn btn-default text-center" id="CPU_Usage">--</div>
-                </div>
-                <div class="btn-group-vertical col-xs-2">
-                    <div class="btn text-center btn-default">
-                        <img class="text-center" src="png/ram.png" height="20px" />
-                    </div>
-                    <div class="btn btn-default text-center" id="RAM_Avail">--</div>
-                </div>
-                <div class="btn-group-vertical col-xs-2">
-                    <div class="btn text-center btn-default">
-                        <img class="text-center" src="png/speedcomputer.png" height="20px" />
-                    </div>
-                    <div class="btn btn-default text-center" id="RAM_Usage">--</div>
-                </div>
-                <div class="btn-group-vertical col-xs-2">
-                    <div class="btn text-center btn-default">
-                        <img class="text-center" src="png/disk.png" height="20px" />
-                    </div>
-                    <div class="btn btn-default text-center" id="DISK_Avail">--</div>
-                </div>
-                <div class="btn-group-vertical col-xs-2">
-                    <div class="btn text-center btn-default">
-                        <img class="text-center" src="png/datausage.png" height="20px" />
-                    </div>
-                    <div class="btn btn-default text-center" id="DISK_Usage">--</div>
-                </div>
-            </div>
 
         </div>
-    </div>
-    <div class="panel panel-primary" style="border-color:#555">
-        <div class="panel-heading" style="background: #555">
-            终端</div>
-        <div class="panel-body">
-            <div class="row">
-                <div class="col-xs-12">
-                    <div class="alert alert-success" role="alert">
-                        执行：
-                        <span class="tip"> </span>
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                设备</div>
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-xs-3 btn-item">
+                    </div>
+                    <div class="col-xs-3 btn-item">
+                        <button type="button" class="btn btn-danger btn-trigger">
+                            <i class="fa fa-power-off"></i>关机</button>
+                    </div>
+                    <div class="col-xs-3 btn-item">
+                        <button type="button" class="btn btn-primary btn-trigger">
+                            <i class="fa fa-refresh"></i>重启</button>
+                    </div>
+                    <div class="col-xs-3 btn-item">
+                    </div>
+                    <script type="text/javascript">
+                        var url = "ajax/pi.php";
+                        $(function () {
+                            $(".btn-trigger").click(function () {
+                                var text = $(this).text().replace(/ /g, "").replace(/\n/g, "").replace(/\r/g, "").replace(/\t/g, "");
+                                var cmd = "";
+                                switch (text) {
+                                    case "关机":
+                                        cmd = "sudo shutdown -h now";
+                                        break;
+                                    case "重启":
+                                        cmd = "sudo reboot";
+                                        break;
+                                }
+                                if (confirm("确定要执行该命令吗？")) {
+                                    $.ajax({
+                                        type: "POST",
+                                        url: url,
+                                        data: {
+                                            action: "set-linux-cmd",
+                                            cmd: cmd
+                                        },
+                                        success: function (result) {
+                                            $(".tip").html(result);
+                                        }
+                                    });
+                                }
+                            });
+                        });
+                    </script>
+                </div>
+            </div>
+        </div>
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                插件</div>
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-xs-12">
+                        <button type="button" class="btn btn-primary" id="aria2">Aria2</button>
+                        <button type="button" class="btn btn-primary" id="download">下载</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                传感器</div>
+            <div class="panel-body">
+                <div class="row col-xs-12">
+                    <div class="btn-group-vertical col-xs-2">
+                        <div class="btn text-center btn-default">
+                            <img class="text-center" src="png/Temperature.png" height="20px" />
+                        </div>
+                        <div class="btn text-center btn-default" id="Temperature">--</div>
+                    </div>
+                    <div class="btn-group-vertical col-xs-2">
+                        <div class="btn text-center btn-default">
+                            <img class="text-center" src="png/usagecomputer.png" height="20px" />
+                        </div>
+                        <div class="btn btn-default text-center" id="CPU_Usage">--</div>
+                    </div>
+                    <div class="btn-group-vertical col-xs-2">
+                        <div class="btn text-center btn-default">
+                            <img class="text-center" src="png/ram.png" height="20px" />
+                        </div>
+                        <div class="btn btn-default text-center" id="RAM_Avail">--</div>
+                    </div>
+                    <div class="btn-group-vertical col-xs-2">
+                        <div class="btn text-center btn-default">
+                            <img class="text-center" src="png/speedcomputer.png" height="20px" />
+                        </div>
+                        <div class="btn btn-default text-center" id="RAM_Usage">--</div>
+                    </div>
+                    <div class="btn-group-vertical col-xs-2">
+                        <div class="btn text-center btn-default">
+                            <img class="text-center" src="png/disk.png" height="20px" />
+                        </div>
+                        <div class="btn btn-default text-center" id="DISK_Avail">--</div>
+                    </div>
+                    <div class="btn-group-vertical col-xs-2">
+                        <div class="btn text-center btn-default">
+                            <img class="text-center" src="png/datausage.png" height="20px" />
+                        </div>
+                        <div class="btn btn-default text-center" id="DISK_Usage">--</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="panel panel-primary" style="border-color:#555">
+            <div class="panel-heading" style="background: #555">
+                终端</div>
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-xs-12">
+                        <div class="alert alert-success" style="" role="alert">
+                            执行：
+                            <span class="tip"> </span>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    </div>
-    <script language="javascript" src="main.js">
-    </script>
+    <script language="javascript" src="main.js"></script>
 </body>
 
 </html>
