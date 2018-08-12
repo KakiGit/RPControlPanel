@@ -8,7 +8,7 @@ $.ajax({
         ws.onmessage = function (data) {
             let elements = data.data.split(' ')
             if (elements[0] == '1')
-                $(".tip").html(data.data.substr(1))
+                $(".tip").html(data.data.substr(2))
             else {
                 $("#Temperature").text(elements[1] + "℃")
                 if (parseInt(elements[1]) >= 60) {

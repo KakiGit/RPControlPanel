@@ -95,7 +95,13 @@ def receiveData(client):
         if(data):
             tmp = parse_data(data)
             print(tmp, "from", client.getpeername())
-            sendMessage(client, '1 ' + os.system(tmp))
+            if os.system(tmp) == 0:
+                sendMessage(client, '1 ' + 'command \" ' +
+                            tmp + " \" executed successfully")
+            else:
+                sendMessage(client, '1 ' + 'error(s) happened when executing \" ' +
+                            tmp + " \"")
+
         else:
             break
 
