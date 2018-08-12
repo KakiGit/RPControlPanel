@@ -57,23 +57,30 @@ $.ajax({
     }
 })
 
-$(function () {
-    $(".btn-trigger").click(function () {
-        let text = $(this).text().replace(/ /g, "").replace(/\n/g, "").replace(/\r/g, "").replace(/\t/g, "")
-        let cmd = ""
-        switch (text) {
-            case "关机":
-                cmd = "sudo shutdown -h now"
-                break
-            case "重启":
-                cmd = "sudo reboot"
-                break
-        }
-        if (confirm("确定要执行该命令吗？")) {
-            ws.send(cmd)
-            $(".tip").html(result);
-        }
-    })
+
+$(".btn-trigger").click(function () {
+    let text = $(this).text().replace(/ /g, "").replace(/\n/g, "").replace(/\r/g, "").replace(/\t/g, "")
+    let cmd = ""
+    switch (text) {
+        case "关机":
+            cmd = "sudo shutdown -h now"
+            break
+        case "重启":
+            cmd = "sudo reboot"
+            break
+    }
+    if (confirm("确定要执行该" + text + "吗？")) {
+        ws.send(cmd)
+        $(".tip").html(cmd);
+    }
+})
+
+$("#update").click(function () {
+    let cmd = "GIT_DIR=/home/pi/RPControlPanel/.git git pull"
+    if (confirm("update the website?")) {
+        ws.send(cmd)
+        $(".tip").html(cmd);
+    }
 })
 
 $(function () {
