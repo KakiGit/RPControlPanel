@@ -121,7 +121,7 @@ def systemPara(client):
         RAM_total = round(int(RAM_stats[0]) / 1000, 1)
         RAM_used = round(int(RAM_stats[1]) / 1000, 1)
         RAM_Avail = RAM_total - RAM_used
-        RAM_Usage = round(RAM_used / RAM_total, 1)
+        RAM_Usage = round(100 * RAM_used / RAM_total, 1)
         dataToBeSent = CPU_temp + ' ' + CPU_usage + ' ' + \
             str(RAM_Avail)+' '+str(RAM_Usage)+' ' + \
             str(DISK_Avail)+' '+str(DISK_perc)+' '
