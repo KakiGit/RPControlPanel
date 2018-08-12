@@ -1,6 +1,5 @@
 .git
 ajax/*.txt
-webui-aria2
 nohup.out
 __pycache__/
 
