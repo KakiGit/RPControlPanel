@@ -76,7 +76,7 @@ $(".btn-trigger").click(function () {
 })
 
 $("#update").click(function () {
-    let cmd = "GIT_DIR=/home/pi/RPControlPanel/.git git pull"
+    let cmd = "git pull"
     if (confirm("update the website?")) {
         ws.send(cmd)
         $(".tip").html(cmd);
