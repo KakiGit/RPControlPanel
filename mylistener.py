@@ -52,7 +52,6 @@ def sendMessage(client, message):
         print("the message is too long to send in a time")
         return
     message_byte = bytes()
-    print(type(backMsgList[0]))
     for c in backMsgList:
         message_byte += c
     message_byte += bytes(message, encoding="utf8")
