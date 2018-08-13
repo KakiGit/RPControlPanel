@@ -1,0 +1,70 @@
+body {
+    background-color: #333;
+}
+
+.container {
+    color: white;
+}
+
+.page-header {
+    margin: 20px 0;
+    border-bottom: 1px solid rgba(255, 255, 255, .5);
+    padding-bottom: 0;
+    text-align: center;
+}
+
+.btn-item {
+    text-align: center;
+}
+
+i {
+    margin-right: 3px;
+    display: inline-block;
+}
+
+h1 {
+    text-align: center;
+}
+
+.tip {
+    font-weight: bold;
+    color: white;
+}
+
+.card {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    border-color: #555
+}
+
+.lead {
+    font-size: small;
+}
+
+.list-group {
+    padding-left: 1px;
+    padding-right: 1px;
+}
+
+.text-center {
+    padding-left: 1px;
+    padding-right: 1px;
+}
+
+.btn {
+    margin-top: 3px;
+    margin-bottom: 3px;
+}
+
+a,
+a:hover {
+    color: white;
+}
+
+p {
+    color: rgba(255, 255, 255, .5);
+}
+
+.card-header {
+    background: #555;
+}

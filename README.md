@@ -8,12 +8,11 @@ This is a Web control panel for Raspberry Pi. Webui-aria2 is integrated into the
     sudo apt install apache2
     ```
 
-2. Clone this repository and webui-aria2.
+2. Clone this repository.
 
     ```bash
     git clone https://github.com/KakiGit/RPControlPanel.git
-    cd RPControlPanel
-    git submodule add https://github.com/ziahamza/webui-aria2.git
+    cd RPControlPanel/webui-aria2
     ln -s <Your home directory>/Downloads <YourPath>/webui-aria2/Downloads
     ```
 
@@ -27,7 +26,8 @@ This is a Web control panel for Raspberry Pi. Webui-aria2 is integrated into the
 4. Run linuxcmd.py to read parameters from Raspberry Pi and execute commands from the website.
 
     ```bash
-    nohup sudo python3 mylistener.py &
+    cd RPControlPanel/
+    nohup python3 mylistener.py &
     ```
 5. Get aria2 and run it. The config file can be found on the Internet.
 

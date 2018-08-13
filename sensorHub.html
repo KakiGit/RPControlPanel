@@ -1,0 +1,314 @@
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Raspberry Pi Control Panel</title>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+        crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+        crossorigin="anonymous">
+    <style type="text/css">
+        body {
+            background-color: #333;
+        }
+
+        a,
+        a:hover {
+            color: white;
+        }
+
+        p {
+            color: rgba(255, 255, 255, .5);
+        }
+
+        .custom-control-label {
+            user-select: none;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container text-center text-white">
+        <div class=" cover-container d-flex w-100 h-25 p-3 mx-auto flex-column ">
+            <header class="masthead mb-auto ">
+                <div class="inner ">
+                    <h3 class="masthead-brand ">GPIO Panel</h3>
+                </div>
+            </header>
+
+            <div class="row col-12 text-left">
+                <div class="form-group col-6">
+                    <div class="custom-control custom-checkbox rounded">
+                        <input type="checkbox" class="custom-control-input" id="GPIO_0">
+                        <label class="custom-control-label" for="GPIO_0">GPIO_0</label>
+                    </div>
+                    <div class="custom-control custom-checkbox rounded">
+                        <input type="checkbox" class="custom-control-input" id="GPIO_0_Mode">
+                        <label class="custom-control-label" for="GPIO_0_Mode">PWM</label>
+                    </div>
+                    <div class="d-none" id="GPIO_0_PWM">
+                        <label>Duty Cycle</label>
+                        <input type="range" class="custom-range" id="GPIO_0_PWMTRange">
+                    </div>
+                </div>
+                <div class="form-group col-6">
+                    <div class="custom-control custom-checkbox rounded">
+                        <input type="checkbox" class="custom-control-input" id="GPIO_1">
+                        <label class="custom-control-label" for="GPIO_1">GPIO_1</label>
+                    </div>
+                    <div class="custom-control custom-checkbox rounded">
+                        <input type="checkbox" class="custom-control-input" id="GPIO_1_Mode">
+                        <label class="custom-control-label" for="GPIO_1_Mode">PWM</label>
+                    </div>
+                    <div class="d-none" id="GPIO_1_PWM">
+                        <label>Duty Cycle</label>
+                        <input type="range" class="custom-range" id="GPIO_1_PWMTRange">
+                    </div>
+                </div>
+            </div>
+            <div class="row col-12 text-left">
+                <div class="form-group col-6">
+                    <div class="custom-control custom-checkbox rounded">
+                        <input type="checkbox" class="custom-control-input" id="GPIO_2">
+                        <label class="custom-control-label" for="GPIO_2">GPIO_2</label>
+                    </div>
+                    <div class="custom-control custom-checkbox rounded">
+                        <input type="checkbox" class="custom-control-input" id="GPIO_2_Mode">
+                        <label class="custom-control-label" for="GPIO_2_Mode">PWM</label>
+                    </div>
+                    <div class="d-none" id="GPIO_2_PWM">
+                        <label>Duty Cycle</label>
+                        <input type="range" class="custom-range" id="GPIO_2_PWMTRange">
+                    </div>
+                </div>
+                <div class="form-group col-6">
+                    <div class="custom-control custom-checkbox rounded">
+                        <input type="checkbox" class="custom-control-input" id="GPIO_3">
+                        <label class="custom-control-label" for="GPIO_3">GPIO_3</label>
+                    </div>
+                    <div class="custom-control custom-checkbox rounded">
+                        <input type="checkbox" class="custom-control-input" id="GPIO_3_Mode">
+                        <label class="custom-control-label" for="GPIO_3_Mode">PWM</label>
+                    </div>
+                    <div class="d-none" id="GPIO_3_PWM">
+                        <label>Duty Cycle</label>
+                        <input type="range" class="custom-range" id="GPIO_3_PWMTRange">
+                    </div>
+                </div>
+            </div>
+            <div class="row col-12 text-left">
+                <div class="form-group col-6">
+                    <div class="custom-control custom-checkbox rounded">
+                        <input type="checkbox" class="custom-control-input" id="GPIO_4">
+                        <label class="custom-control-label" for="GPIO_4">GPIO_4</label>
+                    </div>
+                    <div class="custom-control custom-checkbox rounded">
+                        <input type="checkbox" class="custom-control-input" id="GPIO_4_Mode">
+                        <label class="custom-control-label" for="GPIO_4_Mode">PWM</label>
+                    </div>
+                    <div class="d-none" id="GPIO_4_PWM">
+                        <label>Duty Cycle</label>
+                        <input type="range" class="custom-range" id="GPIO_4_PWMTRange">
+                    </div>
+                </div>
+                <div class="form-group col-6">
+                    <div class="custom-control custom-checkbox rounded">
+                        <input type="checkbox" class="custom-control-input" id="GPIO_5">
+                        <label class="custom-control-label" for="GPIO_5">GPIO_5</label>
+                    </div>
+                    <div class="custom-control custom-checkbox rounded">
+                        <input type="checkbox" class="custom-control-input" id="GPIO_5_Mode">
+                        <label class="custom-control-label" for="GPIO_5_Mode">PWM</label>
+                    </div>
+                    <div class="d-none" id="GPIO_5_PWM">
+                        <label>Duty Cycle</label>
+                        <input type="range" class="custom-range" id="GPIO_5_PWMTRange">
+                    </div>
+                </div>
+            </div>
+            <div class="row col-12 text-left">
+                <div class="form-group col-6">
+                    <div class="custom-control custom-checkbox rounded">
+                        <input type="checkbox" class="custom-control-input" id="GPIO_6">
+                        <label class="custom-control-label" for="GPIO_6">GPIO_6</label>
+                    </div>
+                    <div class="custom-control custom-checkbox rounded">
+                        <input type="checkbox" class="custom-control-input" id="GPIO_6_Mode">
+                        <label class="custom-control-label" for="GPIO_6_Mode">PWM</label>
+                    </div>
+                    <div class="d-none" id="GPIO_6_PWM">
+                        <label>Duty Cycle</label>
+                        <input type="range" class="custom-range" id="GPIO_6_PWMTRange">
+                    </div>
+                </div>
+                <div class="form-group col-6">
+                    <div class="custom-control custom-checkbox rounded">
+                        <input type="checkbox" class="custom-control-input" id="GPIO_7">
+                        <label class="custom-control-label" for="GPIO_7">GPIO_7</label>
+                    </div>
+                    <div class="custom-control custom-checkbox rounded">
+                        <input type="checkbox" class="custom-control-input" id="GPIO_7_Mode">
+                        <label class="custom-control-label" for="GPIO_7_Mode">PWM</label>
+                    </div>
+                    <div class="d-none" id="GPIO_7_PWM">
+                        <label>Duty Cycle</label>
+                        <input type="range" class="custom-range" id="GPIO_7_PWMTRange">
+                    </div>
+                </div>
+            </div>
+            <div class="row col-12 text-left">
+                <div class="form-group col-6">
+                    <div class="custom-control custom-checkbox rounded">
+                        <input type="checkbox" class="custom-control-input" id="GPIO_21">
+                        <label class="custom-control-label" for="GPIO_21">GPIO_21</label>
+                    </div>
+                    <div class="custom-control custom-checkbox rounded">
+                        <input type="checkbox" class="custom-control-input" id="GPIO_21_Mode">
+                        <label class="custom-control-label" for="GPIO_21_Mode">PWM</label>
+                    </div>
+                    <div class="d-none" id="GPIO_21_PWM">
+                        <label>Duty Cycle</label>
+                        <input type="range" class="custom-range" id="GPIO_21_PWMTRange">
+                    </div>
+                </div>
+                <div class="form-group col-6">
+                    <div class="custom-control custom-checkbox rounded">
+                        <input type="checkbox" class="custom-control-input" id="GPIO_22">
+                        <label class="custom-control-label" for="GPIO_22">GPIO_22</label>
+                    </div>
+                    <div class="custom-control custom-checkbox rounded">
+                        <input type="checkbox" class="custom-control-input" id="GPIO_22_Mode">
+                        <label class="custom-control-label" for="GPIO_22_Mode">PWM</label>
+                    </div>
+                    <div class="d-none" id="GPIO_22_PWM">
+                        <label>Duty Cycle</label>
+                        <input type="range" class="custom-range" id="GPIO_22_PWMTRange">
+                    </div>
+                </div>
+            </div>
+            <div class="row col-12 text-left">
+                <div class="form-group col-6">
+                    <div class="custom-control custom-checkbox rounded">
+                        <input type="checkbox" class="custom-control-input" id="GPIO_23">
+                        <label class="custom-control-label" for="GPIO_23">GPIO_23</label>
+                    </div>
+                    <div class="custom-control custom-checkbox rounded">
+                        <input type="checkbox" class="custom-control-input" id="GPIO_23_Mode">
+                        <label class="custom-control-label" for="GPIO_23_Mode">PWM</label>
+                    </div>
+                    <div class="d-none" id="GPIO_23_PWM">
+                        <label>Duty Cycle</label>
+                        <input type="range" class="custom-range" id="GPIO_23_PWMTRange">
+                    </div>
+                </div>
+                <div class="form-group col-6">
+                    <div class="custom-control custom-checkbox rounded">
+                        <input type="checkbox" class="custom-control-input" id="GPIO_24">
+                        <label class="custom-control-label" for="GPIO_24">GPIO_24</label>
+                    </div>
+                    <div class="custom-control custom-checkbox rounded">
+                        <input type="checkbox" class="custom-control-input" id="GPIO_24_Mode">
+                        <label class="custom-control-label" for="GPIO_24_Mode">PWM</label>
+                    </div>
+                    <div class="d-none" id="GPIO_24_PWM">
+                        <label>Duty Cycle</label>
+                        <input type="range" class="custom-range" id="GPIO_24_PWMTRange">
+                    </div>
+                </div>
+            </div>
+            <div class="row col-12 text-left">
+                <div class="form-group col-6">
+                    <div class="custom-control custom-checkbox rounded">
+                        <input type="checkbox" class="custom-control-input" id="GPIO_25">
+                        <label class="custom-control-label" for="GPIO_25">GPIO_25</label>
+                    </div>
+                    <div class="custom-control custom-checkbox rounded">
+                        <input type="checkbox" class="custom-control-input" id="GPIO_25_Mode">
+                        <label class="custom-control-label" for="GPIO_25_Mode">PWM</label>
+                    </div>
+                    <div class="d-none" id="GPIO_25_PWM">
+                        <label>Duty Cycle</label>
+                        <input type="range" class="custom-range" id="GPIO_25_PWMTRange">
+                    </div>
+                </div>
+                <div class="form-group col-6">
+                    <div class="custom-control custom-checkbox rounded">
+                        <input type="checkbox" class="custom-control-input" id="GPIO_26">
+                        <label class="custom-control-label" for="GPIO_26">GPIO_26</label>
+                    </div>
+                    <div class="custom-control custom-checkbox rounded">
+                        <input type="checkbox" class="custom-control-input" id="GPIO_26_Mode">
+                        <label class="custom-control-label" for="GPIO_26_Mode">PWM</label>
+                    </div>
+                    <div class="d-none" id="GPIO_26_PWM">
+                        <label>Duty Cycle</label>
+                        <input type="range" class="custom-range" id="GPIO_26_PWMTRange">
+                    </div>
+                </div>
+            </div>
+            <div class="row col-12 text-left">
+                <div class="form-group col-6">
+                    <div class="custom-control custom-checkbox rounded">
+                        <input type="checkbox" class="custom-control-input" id="GPIO_27">
+                        <label class="custom-control-label" for="GPIO_27">GPIO_27</label>
+                    </div>
+                    <div class="custom-control custom-checkbox rounded">
+                        <input type="checkbox" class="custom-control-input" id="GPIO_27_Mode">
+                        <label class="custom-control-label" for="GPIO_27_Mode">PWM</label>
+                    </div>
+                    <div class="d-none" id="GPIO_27_PWM">
+                        <label>Duty Cycle</label>
+                        <input type="range" class="custom-range" id="GPIO_27_PWMTRange">
+                    </div>
+                </div>
+                <div class="form-group col-6">
+                    <div class="custom-control custom-checkbox rounded">
+                        <input type="checkbox" class="custom-control-input" id="GPIO_28">
+                        <label class="custom-control-label" for="GPIO_28">GPIO_28</label>
+                    </div>
+                    <div class="custom-control custom-checkbox rounded">
+                        <input type="checkbox" class="custom-control-input" id="GPIO_28_Mode">
+                        <label class="custom-control-label" for="GPIO_28_Mode">PWM</label>
+                    </div>
+                    <div class="d-none" id="GPIO_28_PWM">
+                        <label>Duty Cycle</label>
+                        <input type="range" class="custom-range" id="GPIO_28_PWMTRange">
+                    </div>
+                </div>
+            </div>
+            <div class="row col-12 text-left">
+                <div class="form-group col-6">
+                    <div class="custom-control custom-checkbox rounded">
+                        <input type="checkbox" class="custom-control-input" id="GPIO_29">
+                        <label class="custom-control-label" for="GPIO_29">GPIO_29</label>
+                    </div>
+                    <div class="custom-control custom-checkbox rounded">
+                        <input type="checkbox" class="custom-control-input" id="GPIO_29_Mode">
+                        <label class="custom-control-label" for="GPIO_29_Mode">PWM</label>
+                    </div>
+                    <div class="d-none" id="GPIO_29_PWM">
+                        <label>Duty Cycle</label>
+                        <input type="range" class="custom-range" id="GPIO_29_PWMTRange">
+                    </div>
+                </div>
+            </div>
+
+            <footer class="mastfoot mt-auto ">
+                <div class="inner ">
+                    <p>
+                        <a href="https://github.com/KakiGit/RPControlPanel ">RPControlPanel</a>, by
+                        <a href="https://github.com/KakiGit ">@Kaki</a>.</p>
+                </div>
+            </footer>
+        </div>
+    </div>
+    <script language="javascript" src="js/sensorScript.js"></script>
+</body>
+
+</html>
