@@ -80,8 +80,12 @@ $(".btn-trigger").click(function () {
 })
 
 $("#confirmYes").click(function () {
-    console.log($(".tip").html())
-    // ws.send($(".tip").html())
+    ws.send($(".tip").html())
+    $("#confirm").modal('hide')
+})
+
+$("#confirmNo").click(function () {
+    $(".tip").html("")
     $("#confirm").modal('hide')
 })
 
