@@ -48,6 +48,20 @@ def getDiskSpace():
             return(line.split()[1:5])
 
 
+def file_name(file_dir):
+    data = []
+    for root, dirs, files in os.walk(file_dir):
+        for dir in dirs:
+            data.append({'folder', dir})
+        for file in files:
+            filePath = root+'/'+file
+            fileStat = os.stat(filePath)
+            time = time.strftime('%Y-%m-%d %H:%M:%S',
+                                 time.localtime(fileStat.st_mtime))
+            size = round(int(fileStat.st_size)/(1024*1024), 1)
+            data.append({'file', file, time, size})
+
+
 if __name__ == '__main__':
 
     file = open("/var/www/html/ajax/linuxcmd.txt", "w")
@@ -57,16 +71,16 @@ if __name__ == '__main__':
     file = open("/var/www/html/ajax/connect.txt", "w")
     file.write("")
     file.close()
-    count=0
+    count = 0
     while True:
 
         file = open("/var/www/html/ajax/connect.txt", "r")
         text = file.read()
         file.close()
         # Disk information
-        count=count+1
+        count = count+1
         if(text != ""):
-            count=0
+            count = 0
             print("Connecting ...")
             file = open("/var/www/html/ajax/connect.txt", "w")
             file.write("")
@@ -109,8 +123,8 @@ if __name__ == '__main__':
                 f.write(str(DISK_Avail)+'\n')
                 f.write(str(DISK_perc)+'\n')
                 f.close()
-        sleepTime=1
-        if(count>60):
-           sleepTime=60
-           print("I am going to sleep")
+        sleepTime = 1
+        if(count > 60):
+            sleepTime = 60
+            print("I am going to sleep")
         time.sleep(sleepTime)
