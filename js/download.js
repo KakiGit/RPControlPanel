@@ -2,7 +2,7 @@
 
 $(function () {
     $.contextMenu({
-        selector: '.btn',
+        selector: '.list-group-item',
         callback: function (key, options) {
             var m = "clicked: " + key;
             console.log(m);

@@ -52,14 +52,16 @@ def file_name(file_dir):
     data = []
     for root, dirs, files in os.walk(file_dir):
         for dir in dirs:
-            data.append({'folder', dir})
+            data.append({'type': 'folder', 'name': dir})
         for file in files:
             filePath = root+'/'+file
             fileStat = os.stat(filePath)
-            time = time.strftime('%Y-%m-%d %H:%M:%S',
-                                 time.localtime(fileStat.st_mtime))
+            localTime = time.strftime('%Y-%m-%d %H:%M:%S',
+                                      time.localtime(fileStat.st_mtime))
             size = round(int(fileStat.st_size)/(1024*1024), 1)
-            data.append({'file', file, time, size})
+            data.append({'type': 'file', 'name': file,
+                         'time': localTime, 'size': size})
+    return data
 
 
 if __name__ == '__main__':

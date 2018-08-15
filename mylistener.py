@@ -95,13 +95,18 @@ def receiveData(client):
         if(data):
             tmp = parse_data(data)
             print(tmp, "from", client.getpeername())
-            if os.system(tmp) == 0:
-                sendMessage(client, '1 ' + 'command \" ' +
-                            tmp + " \" executed successfully")
+            dl = tmp.split(' ')
+            if(dl[0] == 'download'):
+                fileList = linuxcmd.file_name('/home/pi/Downloads')
+                fileList.sort(key=lambda x: x[dl[1]])
+                sendMessage(client, fileList)
             else:
-                sendMessage(client, '1 ' + 'error(s) happened when executing \" ' +
-                            tmp + " \"")
-
+                if os.system(tmp) == 0:
+                    sendMessage(client, '1 ' + 'command \" ' +
+                                tmp + " \" executed successfully")
+                else:
+                    sendMessage(client, '1 ' + 'error(s) happened when executing \" ' +
+                                tmp + " \"")
         else:
             break
 
